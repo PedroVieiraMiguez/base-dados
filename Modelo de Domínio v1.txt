@@ -1,0 +1,75 @@
+@startuml
+
+left to right direction 
+
+title Sprint 1 - Modelo de Domínio
+
+class ClubeDesportivo{
+    nome
+    dataFundacao
+    atletasInscritos
+}
+
+class Atleta{
+    nome
+    numIdCivil
+    idade
+    freqCardRepouso
+    premio
+}
+
+class Profissional{
+    parcelaFixa
+}
+
+class NaoProfissional{
+    antiguidade
+}
+
+class SemiProfissional{
+    parcelaFixa
+}
+
+class Amador{
+    
+}
+
+
+class Genero
+
+
+
+class ClubeDesportivo
+class Pagamento
+class Actividade
+class ObjectivoTreino
+class FCM
+class FCT
+class Sistema
+
+Sistema --> ClubeDesportivo: possui
+
+ClubeDesportivo --> Atleta: contém
+ClubeDesportivo --> Pagamento: faz
+Pagamento --> Atleta: é efectuado ao
+Atleta --> Profissional: pode ser
+Atleta --> NaoProfissional: pode ser
+Atleta --> Genero: tem
+Atleta --> Actividade: realiza
+Atleta --> FCM: possui
+Atleta --> FCT: possui
+Atleta --> ObjectivoTreino: possui
+ObjectivoTreino --> FCT: determina
+FCM <-- FCT: requer
+Actividade --> FCM: determina
+Genero --> FCM: determina
+NaoProfissional --> Amador: pode ser
+NaoProfissional --> SemiProfissional: pode ser
+Profissional --> Pagamento: determina
+Amador --> Pagamento: determina
+SemiProfissional --> Pagamento: determina
+
+
+
+
+@enduml
