@@ -1,0 +1,106 @@
+@startuml
+
+left to right direction
+
+title Sprint 1 - Modelo Conceptual - Nível Lógico
+
+object ClubeDesportivo{
+    nome
+    dataFundacao
+    atletasInscritos
+}
+
+object Atleta{
+    nome
+    genero
+    numIdCivil
+    numSocio
+    dataNascimento
+    dataInscricao
+    premiosAcumulados
+    freqCardRepouso
+}
+
+object Antiguidade{
+    valorMin
+    valorMax
+    percentagem
+}
+
+object FCM{
+    valorFixo1
+    valorFixo2
+    /calcularFCM
+}
+
+object FCT{
+    /calcularFCT
+}
+
+object ObjectivoTreino {
+    tipo
+    valor
+}
+
+object Competicao {
+    actividade
+    dataInicial
+    dataFinal
+}
+
+object Pagamento {
+    data
+    numSocio
+    parcela1
+    parcela2
+    tipoAtleta
+    /calcularPagamento
+}
+
+object Premio {
+    valor
+    qualificacao
+}
+
+object Profissional{
+    parcelaFixa
+}
+
+object NaoProfissional{
+}
+
+object SemiProfissional{
+    parcelaFixa
+}
+
+object Amador{
+    
+}
+
+object Actividade {
+    nome
+}
+
+ClubeDesportivo"1"-->"0..*"Atleta: tem inscrito
+ClubeDesportivo"1"-->"0..*"Pagamento: efectua
+Atleta"1"-->"1"Pagamento: recebe
+Profissional--|>Atleta
+Amador--|>NaoProfissional
+SemiProfissional--|>NaoProfissional
+NaoProfissional--|>Atleta
+Atleta"1..*"-->"1..*"Competicao: participa em
+Competicao"1"-->"1..*"Premio: possui
+Atleta"1"-->"1..*"Premio: recebe
+Atleta"1"-->"1"Actividade: pratica
+FCM"1"-->"1"Atleta: é calculada para
+FCT"1"-->"1"Atleta: é calculada para
+Atleta"1"-->"1"Antiguidade: possui
+Atleta"1"-->"1"ObjectivoTreino: possui
+Antiguidade"1"-->"1..*"Pagamento: define
+Actividade"1"-->"1"FCM: define
+ObjectivoTreino"1"-->"1"FCT: define
+
+
+
+
+@enduml
