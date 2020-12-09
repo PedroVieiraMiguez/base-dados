@@ -81,24 +81,24 @@ object Actividade {
     nome
 }
 
-ClubeDesportivo"1"-->"0..*"Atleta: tem inscrito
-ClubeDesportivo"1"-->"0..*"Pagamento: efectua
-Atleta"1"-->"1"Pagamento: recebe
+ClubeDesportivo"1"--"0..*"Atleta: tem inscrito >
+ClubeDesportivo"1"--"0..*"Pagamento: efectua >
+Atleta"1"--"1"Pagamento: recebe >
 Profissional--|>Atleta
 Amador--|>NaoProfissional
 SemiProfissional--|>NaoProfissional
 NaoProfissional--|>Atleta
-Atleta"1..*"-->"1..*"Competicao: participa em
-Competicao"1"-->"1..*"Premio: possui
-Atleta"1"-->"1..*"Premio: recebe
-Atleta"1"-->"1"Actividade: pratica
-FCM"1"-->"1"Atleta: é calculada para
-FCT"1"-->"1"Atleta: é calculada para
-Atleta"1"-->"1"Antiguidade: possui
-Atleta"1"-->"1"ObjectivoTreino: possui
-Antiguidade"1"-->"1..*"Pagamento: define
-Actividade"1"-->"1"FCM: define
-ObjectivoTreino"1"-->"1"FCT: define
+Atleta"1..*"--"1..*"Competicao: participa em >
+Atleta"1"--"1"Actividade: pratica >
+Competicao"1"--"1..*"Premio: possui >
+Atleta"1"--"1..*"Premio: recebe >
+FCM"1"--"1"Atleta: é calculada para >
+FCT"1"--"1"Atleta: é calculada para >
+Atleta"1"--"1"Antiguidade: possui >
+Atleta"1"--"1"ObjectivoTreino: possui >
+Antiguidade"1"--"1..*"Pagamento: define >
+Actividade"1"--"1"FCM: define >
+ObjectivoTreino"1"--"1"FCT: define >
 
 
 
