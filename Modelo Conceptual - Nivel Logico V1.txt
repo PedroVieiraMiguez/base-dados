@@ -32,6 +32,8 @@ object Competicao {
 object Pagamento {
     data
     numSocio
+    parcela1
+    parcela2
     /calcularPagamento
 }
 
