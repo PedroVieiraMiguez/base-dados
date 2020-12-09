@@ -1,0 +1,80 @@
+@startuml
+
+left to right direction
+
+title Sprint 1 - Modelo Conceptual - Nível Lógico
+
+object ClubeDesportivo{
+    nome
+    dataFundacao
+    atletasInscritos
+}
+
+object Atleta{
+    nome
+    genero
+    numIdCivil
+    numSocio
+    dataNascimento
+    dataInscricao
+    premiosAcumulados
+    freqCardRepouso
+    /freqCardMax
+    /freqCardTrabalho
+}
+
+object Competicao {
+    actividade
+    dataInicial
+    dataFinal
+}
+
+object Pagamento {
+    data
+    numSocio
+    /calcularPagamento
+}
+
+object Premio {
+    valor
+    qualificacao
+}
+
+object Profissional{
+    parcelaFixa
+}
+
+object NaoProfissional{
+    /antiguidade
+}
+
+object SemiProfissional{
+    parcelaFixa
+}
+
+object Amador{
+    
+}
+
+object Actividade {
+    nome
+}
+
+ClubeDesportivo"1"-->"0..*"Atleta: tem inscrito
+ClubeDesportivo"1"-->"0..*"Pagamento: efectua
+Atleta"1"-->"1"Pagamento: recebe
+Profissional--|>Atleta
+Amador--|>NaoProfissional
+SemiProfissional--|>NaoProfissional
+NaoProfissional--|>Atleta
+Atleta"1..*"-->"1..*"Competicao: participa em
+Competicao"1"-->"1..*"Premio: possui
+Atleta"1"-->"1..*"Premio: recebe
+Atleta"1"-->"1"Actividade: pratica
+
+
+
+
+
+
+@enduml

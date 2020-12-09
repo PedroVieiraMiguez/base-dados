@@ -1,0 +1,105 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 @startuml\
+\
+title Sprint 1 - Diagrama de Classe\
+\
+class ClubeDesportivo\{\
+    +String nome\
+    +String dataFundacao\
+    +ArrayList<Atleta> atletasInscritos\
+    +void addAtleta()\
+    +String getName()\
+    +ArrayList<Atleta getAtletasInscritos()\
+    +ArrayList<Atleta getSortedByName()\
+    +ArrayList<Atleta getReverseSortedByPremio()\
+    +ArrayList<Atleta getSortedByTypeThenActivityThenName()\
+    +double calcularValorTotalIRS()\
+    \
+    \
+\}\
+\
+class Atleta\{\
+    +String nome\
+    +int numIdCivil\
+    +int idade\
+    +double freqCardRepouso\
+    +double premioAcumulado\
+    +Genero genero\
+    +Atividade atividade\
+    +ObjectivoTreino objectivoTreino\
+    +double calcularPagamento()\
+    +abstract double determinarParcela1()\
+    +abstract double determinarParcela2()\
+    +double freqCardTrabalho()\
+    +double freqCardMax()\
+    +double determinarIT()\
+    +double calcularDescontoIRS()\
+\}\
+\
+class Profissional\{\
+    +double valorFixo\
+    +double determinarParcela1()\
+    +double determinarParcela2()\
+    +int getTotalAtletasProfissional()\
+\}\
+\
+class NaoProfissional\{\
+    +int antiguidade\
+    +abstract double determinarParcela1()\
+    +abstract double determinarParcela2()\
+\}\
+\
+class SemiProfissional\{\
+    +double parcelaFixa()\
+    +double determinarParcela1()\
+    +double determinarParcela2()\
+    +int getTotalAtletasSemiProfissional()\
+\}\
+\
+class Amador\{\
+    +double determinarParcela1()\
+    +double determinarParcela2()\
+    +int getTotalAtletasAmador()\
+\}\
+\
+enum Genero\{\
+    Masculino\
+    Feminino\
+\}\
+\
+enum Atividade\{\
+    Caminhada\
+    Corrida\
+    Ciclismo\
+    Nata\'e7\'e3o\
+\}\
+\
+enum ObjectivoTreino\{\
+    QueimaGordura\
+    Cardio\
+\}\
+\
+class ClubeDesportivo\
+\
+ClubeDesportivo o-- Atleta\
+\
+Atleta <|--Profissional\
+Atleta <|--NaoProfissional\
+Atleta <|--Genero\
+Atleta <|--Atividade\
+Atleta <|--ObjectivoTreino\
+\
+NaoProfissional <|-- Amador\
+NaoProfissional <|-- SemiProfissional\
+\
+\
+\
+\
+\
+@enduml}
