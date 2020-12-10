@@ -18,24 +18,28 @@ object Atleta{
     numSocio {PK}
     dataNascimento
     dataInscricao
-    premiosAcumulados
     freqCardRepouso
+    actividade {FK}
+    genero {FK}
 }
 
 object Genero{
-    descrição
+    descricaoGenero
     numSocio {PK, FK}
 }
 
 object Antiguidade{
+    antiguidadeID {PK}
     valorMin
     valorMax
     percentagem
 }
 
-object valoresFCM{
+object valoresRefFCM{
     valorFixo1
     valorFixo2
+    actividadeID{PK, FK}
+    descricaoGenero{PK, FK}
 }
 
 object FCT{
@@ -43,7 +47,7 @@ object FCT{
 }
 
 object ObjectivoTreino {
-    tipo
+    tipo {PK}
     valor
 }
 
@@ -72,13 +76,13 @@ object Premio {
     valor
     qualificacao
     data
-    competicaoID {PK, FK}
-    numSocio {PK, FK}
+    competicaoID {FK}
+    numSocio {FK}
     premioID{PK}
 }
 
 object Profissional{
-    parcelaFixa
+    parcelaFixas
 }
 
 object NaoProfissional{
@@ -94,6 +98,7 @@ object Amador{
 
 object Actividade {
     nome
+    actividadeID {PK}
 }
 
 ClubeDesportivo"1"--"0..*"Atleta
@@ -104,19 +109,20 @@ Amador--|>NaoProfissional
 SemiProfissional--|>NaoProfissional
 NaoProfissional--|>Atleta
 Atleta"1"--"1"Actividade
-Competicao"1"--"1..*"Premios
+Competicao"1"--"1..*"Premio
 Atleta"1"--"1..*"Premio
 FCT"1"--"1"Atleta
 NaoProfissional"1"--"1"Antiguidade
 Atleta"1"--"1"ObjectivoTreino
 Antiguidade"1"--"1..*"Pagamento
-Actividade"1"--"1"valoresFCM
+Actividade"1"--"1"valoresRefFCM
 ObjectivoTreino"1"--"1"FCT
 Atleta"1"--"1"Genero
 Atleta"1"--"1"Inscricao
 Inscricao"1"--"1"Competicao
+valoresRefFCM"1"--"1"Genero
 
 
 
 
-@endumls
+@enduml
