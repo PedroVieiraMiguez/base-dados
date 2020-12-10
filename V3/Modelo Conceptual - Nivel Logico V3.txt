@@ -1,0 +1,122 @@
+@startuml
+
+left to right direction
+
+title Sprint 1 - Modelo Conceptual - Nível Lógico
+
+object ClubeDesportivo{
+    clubeID {PK}
+    nome
+    dataFundacao
+    atletasInscritos
+}
+
+object Atleta{
+    nome
+    genero
+    numIdCivil
+    numSocio {PK}
+    dataNascimento
+    dataInscricao
+    premiosAcumulados
+    freqCardRepouso
+}
+
+object Genero{
+    descrição
+    numSocio {PK, FK}
+}
+
+object Antiguidade{
+    valorMin
+    valorMax
+    percentagem
+}
+
+object valoresFCM{
+    valorFixo1
+    valorFixo2
+}
+
+object FCT{
+    /calcularFCT
+}
+
+object ObjectivoTreino {
+    tipo
+    valor
+}
+
+object Competicao {
+    competicaoID {PK}
+    actividade
+    dataInicial
+    dataFinal
+}
+
+object Inscricao {
+    competicaoID {PK, FK}
+    numSocio {PK, FK}
+}
+
+object Pagamento {
+    data
+    numSocio
+    parcela1
+    parcela2
+    tipoAtleta
+    /calcularPagamento
+}
+
+object Premio {
+    valor
+    qualificacao
+    data
+    competicaoID {PK, FK}
+    numSocio {PK, FK}
+    premioID{PK}
+}
+
+object Profissional{
+    parcelaFixa
+}
+
+object NaoProfissional{
+}
+
+object SemiProfissional{
+    parcelaFixa
+}
+
+object Amador{
+    
+}
+
+object Actividade {
+    nome
+}
+
+ClubeDesportivo"1"--"0..*"Atleta
+ClubeDesportivo"1"--"0..*"Pagamento
+Atleta"1"--"1"Pagamento
+Profissional--|>Atleta
+Amador--|>NaoProfissional
+SemiProfissional--|>NaoProfissional
+NaoProfissional--|>Atleta
+Atleta"1"--"1"Actividade
+Competicao"1"--"1..*"Premios
+Atleta"1"--"1..*"Premio
+FCT"1"--"1"Atleta
+NaoProfissional"1"--"1"Antiguidade
+Atleta"1"--"1"ObjectivoTreino
+Antiguidade"1"--"1..*"Pagamento
+Actividade"1"--"1"valoresFCM
+ObjectivoTreino"1"--"1"FCT
+Atleta"1"--"1"Genero
+Atleta"1"--"1"Inscricao
+Inscricao"1"--"1"Competicao
+
+
+
+
+@endumls
