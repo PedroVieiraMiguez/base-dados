@@ -16,11 +16,13 @@ object Atleta{
     genero
     numIdCivil
     numSocio {PK}
+    clubeID {PK, FK}
     dataNascimento
     dataInscricao
     freqCardRepouso
     actividade {FK}
     genero {FK}
+    tipoAtletaID {FK}
 }
 
 object Genero{
@@ -35,20 +37,28 @@ object Antiguidade{
     percentagem
 }
 
-object valoresRefFCM{
+object ValoresRefFCM{
     valorFixo1
     valorFixo2
     actividadeID{PK, FK}
     descricaoGenero{PK, FK}
 }
 
-object FCT{
-    /calcularFCT
-}
 
 object ObjectivoTreino {
     tipo {PK}
     valor
+}
+
+object TipoAtleta {
+    tipoAtletaID {PK}
+    descricao
+}
+
+object ValorParcelaFixa {
+    valorParcelaFixaID {PK}
+    tipoAtletaID{FK}
+    valorParcela
 }
 
 object Competicao {
@@ -64,12 +74,13 @@ object Inscricao {
 }
 
 object Pagamento {
+    pagamentoID {PK}
     data
-    numSocio
+    clubeID{FK}
+    numSocio {FK}
     parcela1
     parcela2
-    tipoAtleta
-    /calcularPagamento
+    valorTotal
 }
 
 object Premio {
@@ -82,18 +93,29 @@ object Premio {
 }
 
 object Profissional{
-    parcelaFixas
+    numSocio {PK, FK}
+    clubeID {PK, FK}
+    parcelaFixa
+    parcelaVariavel
 }
 
 object NaoProfissional{
+    numSocio {PK, FK}
+    clubeID {PK, FK}
 }
 
 object SemiProfissional{
-    parcelaFixa
+    numSocio {PK, FK}
+    clubeID {PK, FK}
+    valorParcelaFixaID {FK}
+    parcelaVariavel
 }
 
 object Amador{
-    
+    numSocio {PK, FK}
+    clubeID {PK, FK}
+    parcelaVariavel1
+    parcelaVariavel2
 }
 
 object Actividade {
@@ -103,7 +125,7 @@ object Actividade {
 
 ClubeDesportivo"1"--"0..*"Atleta
 ClubeDesportivo"1"--"0..*"Pagamento
-Atleta"1"--"1"Pagamento
+Atleta"1"--"0..*"Pagamento
 Profissional--|>Atleta
 Amador--|>NaoProfissional
 SemiProfissional--|>NaoProfissional
@@ -111,16 +133,16 @@ NaoProfissional--|>Atleta
 Atleta"1"--"1"Actividade
 Competicao"1"--"1..*"Premio
 Atleta"1"--"1..*"Premio
-FCT"1"--"1"Atleta
 NaoProfissional"1"--"1"Antiguidade
 Atleta"1"--"1"ObjectivoTreino
-Antiguidade"1"--"1..*"Pagamento
-Actividade"1"--"1"valoresRefFCM
-ObjectivoTreino"1"--"1"FCT
+Actividade"1"--"1"ValoresRefFCM
 Atleta"1"--"1"Genero
 Atleta"1"--"1"Inscricao
 Inscricao"1"--"1"Competicao
-valoresRefFCM"1"--"1"Genero
+ValoresRefFCM"1"--"1"Genero
+Atleta"1"--"1"TipoAtleta
+TipoAtleta"0..1"--"1"ValorParcelaFixa
+SemiProfissional"1"--"1"ValorParcelaFixa
 
 
 
