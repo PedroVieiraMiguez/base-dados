@@ -127,8 +127,8 @@ ALTER TABLE NoticiaJornalista
                                                                                   nrEdicao,
                                                                                   idJornal )
         REFERENCES Noticia ( idNoticia,
-                            nrEdicao,
-                            idJornal );
+                             nrEdicao,
+                             idJornal );
 
 ALTER TABLE NoticiaJornalista
     ADD CONSTRAINT fk_NoticiaJornalista_nrIdCivil FOREIGN KEY ( nrIdCivil )
