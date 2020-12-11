@@ -30,12 +30,6 @@ CREATE TABLE Cliente (
     idPessoa   INTEGER
 );
 
-CREATE TABLE Pessoa (
-    idPessoa        INTEGER PRIMARY KEY,
-    nome            VARCHAR(50),
-    dataNascimento  DATE
-);
-
 CREATE TABLE Noticia (
     idNoticia  INTEGER,
     nrEdicao   INTEGER,
@@ -83,6 +77,11 @@ CREATE TABLE EdicaoJornal (
                                                                idJornal )
 );
 
+CREATE TABLE PapelJornalistaNoticia (
+    idPapel     INTEGER PRIMARY KEY,
+    designacao  VARCHAR(30)
+);
+
 ALTER TABLE Jornal
     ADD CONSTRAINT fkJornalidMorada FOREIGN KEY ( idMorada )
         REFERENCES Morada ( idMorada );
@@ -95,16 +94,74 @@ ALTER TABLE EdicaoJornal
     ADD CONSTRAINT fk_EdicaoJornal_idJornal FOREIGN KEY ( idJornal )
         REFERENCES Jornal ( idJornal );
 
+ALTER TABLE PontoVenda
+    ADD CONSTRAINT fk_PontoVenda_idMorada FOREIGN KEY ( idMorada )
+        REFERENCES Morada ( idMorada );
+
 ALTER TABLE Noticia
     ADD CONSTRAINT fk_Noticia_idJornal_nrEdicao FOREIGN KEY ( idJornal,
                                                               nrEdicao )
         REFERENCES EdicaoJornal ( idJornal,
                                   nrEdicao );
-                                  
+
+ALTER TABLE Compra
+    ADD CONSTRAINT fk_Compra_nrEdicao_idJornal FOREIGN KEY ( nrEdicao,
+                                                             idJornal )
+        REFERENCES EdicaoJornal ( nrEdicao,
+                                  idJornal );
+
+ALTER TABLE Compra
+    ADD CONSTRAINT fk_Compra_nrCliente FOREIGN KEY ( nrCliente )
+        REFERENCES Cliente ( nrCliente );
+
+ALTER TABLE Compra
+    ADD CONSTRAINT fk_Compra_idPontoVenda FOREIGN KEY ( idPontoVenda )
+        REFERENCES PontoVenda ( idPontoVenda );
+
+ALTER TABLE Cliente
+    ADD CONSTRAINT fk_Cliente_idPessoa FOREIGN KEY ( idPessoa )
+        REFERENCES Pessoa ( idPessoa );
+
 ALTER TABLE NoticiaJornalista
-    ADD CONSTRAINT fk_NoticiaJornalista_idNoticia_nrEdicao_idJornalFOREIGN KEY ( idNoticia, nrEdicao, idJornal)
-        REFERENCES Jornal ( idJornal, nrEdicao, idJornal );                                  
+    ADD CONSTRAINT fk_NoticiaJornalista_idNoticia_nrEdicao_idJornal FOREIGN KEY ( idNoticia,
+                                                                                  nrEdicao,
+                                                                                  idJornal )
+        REFERENCES Noticia ( idNoticia,
+                            nrEdicao,
+                            idJornal );
 
---DROP TABLE Jornal CASCADE CONSTRAINTS PURGE;
+ALTER TABLE NoticiaJornalista
+    ADD CONSTRAINT fk_NoticiaJornalista_nrIdCivil FOREIGN KEY ( nrIdCivil )
+        REFERENCES Jornalista ( nrIdCivil );
 
---DROP TABLE morada CASCADE CONSTRAINTS PURGE;
+ALTER TABLE NoticiaJornalista
+    ADD CONSTRAINT fk_NoticiaJornalista_idPapel FOREIGN KEY ( idPapel )
+        REFERENCES PapelJornalistaNoticia ( idPapel );
+
+ALTER TABLE Jornalista
+    ADD CONSTRAINT fk_Jornalista_idPessoa FOREIGN KEY ( idPessoa )
+        REFERENCES Pessoa ( idPessoa );
+
+DROP TABLE Jornal CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Morada CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Cliente CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE CodigoPostal CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Compra CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE EdicaoJornal CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Jornalista CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Noticia CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Pessoa CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE NoticiaJornalista CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE PapelJornalistaNoticia CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE PontoVenda CASCADE CONSTRAINTS PURGE;
