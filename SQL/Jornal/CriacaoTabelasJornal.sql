@@ -111,14 +111,22 @@ CREATE TABLE Pessoa (
     nome            VARCHAR(50)
         CONSTRAINT nn_Pessoa_Nome NOT NULL,
     dataNascimento  DATE
-        CONSTRAINT ck_Pessoa_DataNascimento CHECK ( dataNascimento >= TO_DATE('01-01-1940', 'mm-dd-yyyy') );
+        CONSTRAINT ck_Pessoa_DataNascimento CHECK ( dataNascimento >= TO_DATE('01-01-1940', 'mm-dd-yyyy') )
+);
 
-CREATE TABLE EdicaoJornal ( nrEdicao INTEGER, idJornal
-        INTEGER, precoBase FLOAT
-    CONSTRAINT ck_EdicaoJornal_precoBase CHECK(precoBase >= 0), precoVenda FLOAT, idJornalAnterior INTEGER, nrEdicaoAnterior INTEGER,
-    CONSTRAINT pk_EdicaoJornal_nrEdicao_idJornal PRIMARY KEY(nrEdicao,
-                                                                                                                                idJornal),
-CONSTRAINT ck_EdicaoJornal_precoVenda CHECK(precoVenda > precoBase) );
+CREATE TABLE EdicaoJornal (
+    nrEdicao          INTEGER,
+    idJornal          INTEGER,
+    precoBase         FLOAT
+        CONSTRAINT ck_EdicaoJornal_precoBase CHECK ( precoBase >= 0 ),
+    precoVenda        FLOAT,
+    idJornalAnterior  INTEGER,
+    nrEdicaoAnterior  INTEGER,
+    CONSTRAINT pk_EdicaoJornal_nrEdicao_idJornal PRIMARY KEY ( nrEdicao,
+                                                               idJornal ),
+    CONSTRAINT ck_EdicaoJornal_precoVenda CHECK ( precoVenda > precoBase )
+);
+
 CREATE TABLE PapelJornalistaNoticia (
     idPapel     INTEGER PRIMARY KEY,
     designacao  VARCHAR(30)
