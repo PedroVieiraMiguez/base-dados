@@ -1,11 +1,17 @@
 CREATE TABLE Atleta (
     numSocio           INTEGER,
     clubeID            INTEGER,
-    nome               VARCHAR(30),
-    generoID           INTEGER,
-    numIdCivil         INTEGER,
-    dataNascimento     DATE,
-    dataInscricao      DATE,
+    nome               VARCHAR(30)
+        CONSTRAINT nn_Atleta_Nome NOT NULL,
+    tipoGenero         CHAR(1)
+        CONSTRAINT nn_Atleta_TipoGenero NOT NULL,
+    numIdCivil         INTEGER
+        CONSTRAINT nn_Atleta_numIdCivil NOT NULL,
+    dataNascimento     DATE
+        CONSTRAINT nn_Atleta_dataNascimento NOT NULL
+        CONSTRAINT ck_Atleta_DataNascimento CHECK ( dataNascimento >= TO_DATE('01/01/1950', 'dd/mm/yyyy') ),
+    dataInscricao      DATE
+        CONSTRAINT ck_Atleta_DataInscricao CHECK ( dataInscricao >= TO_DATE('01/01/1990', 'dd/mm/yyyy') ),
     freqCardRepouso    FLOAT,
     actividadeID       INTEGER,
     tipoAtletaID       INTEGER,
@@ -64,7 +70,7 @@ CREATE TABLE Antiguidade (
 CREATE TABLE ObjectivoTreino (
     objectivoTreinoID  INTEGER PRIMARY KEY,
     descricao          VARCHAR(40),
-    valor              FLOAT
+    valorFCT           FLOAT
 );
 
 CREATE TABLE Inscricao (
@@ -80,3 +86,15 @@ CREATE TABLE Competicao (
     dataInicial   DATE,
     dataFinal     DATE
 );
+
+CREATE TABLE Premio (
+    premioID        INTEGER,
+    valor           NUMERIC,
+    qualificacao    INTEGER,
+    dataAtribuicao  DATE,
+    competicaoID    INTEGER,
+    numSocio        INTEGER
+);
+
+CREATE TABLE Genero ( tipoGenero char(1) primary key add constraint check(upper(tipoGenero) IN('M', 'F'));
+

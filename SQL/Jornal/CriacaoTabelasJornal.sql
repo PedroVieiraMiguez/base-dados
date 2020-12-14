@@ -1,15 +1,48 @@
+DROP TABLE Jornal CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Morada CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Cliente CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE CodigoPostal CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Compra CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE EdicaoJornal CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Jornalista CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Noticia CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Pessoa CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE NoticiaJornalista CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE PapelJornalistaNoticia CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE PontoVenda CASCADE CONSTRAINTS PURGE;
+
+--###CREATE TABLE###
+
 CREATE TABLE Jornal (
     idJornal      INTEGER PRIMARY KEY,
     idMorada      NUMERIC,
-    dataFundacao  VARCHAR(30),
-    designacao    DATE
+    dataFundacao  DATE
+        CONSTRAINT nn_Jornal_DataFundacao NOT NULL
+        CONSTRAINT ck_Jornal_DataFundacao CHECK ( dataFundacao >= TO_DATE('01-01-1900', 'mm-dd-yyyy') ),
+    designacao    VARCHAR(30)
+        CONSTRAINT nn_Jornal_Designacao NOT NULL
 );
 
 CREATE TABLE Morada (
     idMorada        NUMERIC PRIMARY KEY,
-    nrCodigoPostal  VARCHAR(8),
-    rua             VARCHAR(50),
+    nrCodigoPostal  VARCHAR(8)
+        CONSTRAINT nn_Morada_nrCodigoPostal NOT NULL,
+    rua             VARCHAR(50)
+        CONSTRAINT nn_Morada_rua NOT NULL,
     nrPorta         INTEGER
+        CONSTRAINT nn_Morada_nrPorta NOT NULL
+        CONSTRAINT ck_Morada_nrPorta CHECK ( nrPorta > 0 )
 );
 
 CREATE TABLE PontoVenda (
@@ -22,7 +55,10 @@ CREATE TABLE Compra (
     nrEdicao      INTEGER,
     idJornal      INTEGER,
     idPontoVenda  INTEGER,
-    nrCliente     INTEGER
+    nrCliente     INTEGER,
+    quantidade    INTEGER
+        CONSTRAINT nn_Compra_Quantidade NOT NULL
+        CONSTRAINT ck_Compra_Quantidade CHECK ( quantidade > 0 )
 );
 
 CREATE TABLE Cliente (
@@ -69,18 +105,26 @@ CREATE TABLE Pessoa (
 );
 
 CREATE TABLE EdicaoJornal (
-    nrEdicao    INTEGER,
-    idJornal    INTEGER,
-    precoBase   FLOAT,
-    precoVenda  FLOAT,
+    nrEdicao          INTEGER,
+    idJornal          INTEGER,
+    precoBase         FLOAT
+        CONSTRAINT ck_EdicaoJornal_precoBase CHECK ( precoBase >= 0 ),
+    precoVenda        FLOAT,
+    idJornalAnterior  INTEGER,
+        --CONSTRAINT nn_idJornalAnterior NOT NULL,
+    nrEdicaoAnterior  INTEGER,
+        --CONSTRAINT nn_nrEdicaoAnterior NOT NULL,
     CONSTRAINT pk_EdicaoJornal_nrEdicao_idJornal PRIMARY KEY ( nrEdicao,
-                                                               idJornal )
+                                                               idJornal ),
+    CONSTRAINT ck_EdicaoJornal_precoVenda CHECK ( precoVenda > precoBase )
 );
 
 CREATE TABLE PapelJornalistaNoticia (
     idPapel     INTEGER PRIMARY KEY,
     designacao  VARCHAR(30)
 );
+
+--###ALTER TABLE###
 
 ALTER TABLE Jornal
     ADD CONSTRAINT fkJornalidMorada FOREIGN KEY ( idMorada )
@@ -93,6 +137,15 @@ ALTER TABLE Morada
 ALTER TABLE EdicaoJornal
     ADD CONSTRAINT fk_EdicaoJornal_idJornal FOREIGN KEY ( idJornal )
         REFERENCES Jornal ( idJornal );
+
+ALTER TABLE EdicaoJornal
+    ADD CONSTRAINT fk_EdicaoJornal_idJornalAnterior_nrEdicaoAnterior FOREIGN KEY ( idJornalAnterior,
+                                                                                   nrEdicaoAnterior )
+        REFERENCES EdicaoJornal ( idJornal,
+                                  nrEdicao);
+
+ALTER TABLE EdicaoJornal ADD CONSTRAINT uk_EdicaoJornal_idJornalAnterior_nrEdicaoAnterior UNIQUE ( idJornalAnterior,
+                                                                                                   nrEdicaoAnterior );
 
 ALTER TABLE PontoVenda
     ADD CONSTRAINT fk_PontoVenda_idMorada FOREIGN KEY ( idMorada )
@@ -141,27 +194,4 @@ ALTER TABLE NoticiaJornalista
 ALTER TABLE Jornalista
     ADD CONSTRAINT fk_Jornalista_idPessoa FOREIGN KEY ( idPessoa )
         REFERENCES Pessoa ( idPessoa );
-
-DROP TABLE Jornal CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE Morada CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE Cliente CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE CodigoPostal CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE Compra CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE EdicaoJornal CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE Jornalista CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE Noticia CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE Pessoa CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE NoticiaJornalista CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE PapelJornalistaNoticia CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE PontoVenda CASCADE CONSTRAINTS PURGE;
+        
