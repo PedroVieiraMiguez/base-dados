@@ -48,14 +48,19 @@ CREATE TABLE Morada (
 CREATE TABLE PontoVenda (
     idPontoVenda  INTEGER PRIMARY KEY,
     idMorada      NUMERIC
+        CONSTRAINT nn_PontoVenda_idMorada NOT NULL
 );
 
 CREATE TABLE Compra (
     idCompra      INTEGER PRIMARY KEY,
-    nrEdicao      INTEGER,
-    idJornal      INTEGER,
-    idPontoVenda  INTEGER,
-    nrCliente     INTEGER,
+    nrEdicao      INTEGER
+        CONSTRAINT nn_Compra_nrEdicao NOT NULL,
+    idJornal      INTEGER
+        CONSTRAINT nn_Compra_idJornal NOT NULL,
+    idPontoVenda  INTEGER
+        CONSTRAINT nn_Compra_idPontoVenda NOT NULL,
+    nrCliente     INTEGER
+        CONSTRAINT nn_Compra_nrCliente NOT NULL,
     quantidade    INTEGER
         CONSTRAINT nn_Compra_Quantidade NOT NULL
         CONSTRAINT ck_Compra_Quantidade CHECK ( quantidade > 0 )
@@ -64,6 +69,7 @@ CREATE TABLE Compra (
 CREATE TABLE Cliente (
     nrCliente  INTEGER PRIMARY KEY,
     idPessoa   INTEGER
+        CONSTRAINT nn_Cliente_idPessoa NOT NULL
 );
 
 CREATE TABLE Noticia (
@@ -78,6 +84,7 @@ CREATE TABLE Noticia (
 CREATE TABLE CodigoPostal (
     nrCodigoPostal  VARCHAR(8) PRIMARY KEY,
     localidade      VARCHAR(30)
+        CONSTRAINT nn_CodigoPostal_localidade NOT NULL
 );
 
 CREATE TABLE NoticiaJornalista (
@@ -96,32 +103,26 @@ CREATE TABLE NoticiaJornalista (
 CREATE TABLE Jornalista (
     nrIdCivil  INTEGER PRIMARY KEY,
     idPessoa   INTEGER
+        CONSTRAINT nn_Jornalista_idPessoa NOT NULL
 );
 
 CREATE TABLE Pessoa (
     idPessoa        INTEGER PRIMARY KEY,
-    nome            VARCHAR(50),
+    nome            VARCHAR(50)
+        CONSTRAINT nn_Pessoa_Nome NOT NULL,
     dataNascimento  DATE
-);
+        CONSTRAINT ck_Pessoa_DataNascimento CHECK ( dataNascimento >= TO_DATE('01-01-1940', 'mm-dd-yyyy') );
 
-CREATE TABLE EdicaoJornal (
-    nrEdicao          INTEGER,
-    idJornal          INTEGER,
-    precoBase         FLOAT
-        CONSTRAINT ck_EdicaoJornal_precoBase CHECK ( precoBase >= 0 ),
-    precoVenda        FLOAT,
-    idJornalAnterior  INTEGER,
-        --CONSTRAINT nn_idJornalAnterior NOT NULL,
-    nrEdicaoAnterior  INTEGER,
-        --CONSTRAINT nn_nrEdicaoAnterior NOT NULL,
-    CONSTRAINT pk_EdicaoJornal_nrEdicao_idJornal PRIMARY KEY ( nrEdicao,
-                                                               idJornal ),
-    CONSTRAINT ck_EdicaoJornal_precoVenda CHECK ( precoVenda > precoBase )
-);
-
+CREATE TABLE EdicaoJornal ( nrEdicao INTEGER, idJornal
+        INTEGER, precoBase FLOAT
+    CONSTRAINT ck_EdicaoJornal_precoBase CHECK(precoBase >= 0), precoVenda FLOAT, idJornalAnterior INTEGER, nrEdicaoAnterior INTEGER,
+    CONSTRAINT pk_EdicaoJornal_nrEdicao_idJornal PRIMARY KEY(nrEdicao,
+                                                                                                                                idJornal),
+CONSTRAINT ck_EdicaoJornal_precoVenda CHECK(precoVenda > precoBase) );
 CREATE TABLE PapelJornalistaNoticia (
     idPapel     INTEGER PRIMARY KEY,
     designacao  VARCHAR(30)
+        CONSTRAINT nn_PapelJornalistaNoticia NOT NULL
 );
 
 --###ALTER TABLE###
@@ -142,7 +143,7 @@ ALTER TABLE EdicaoJornal
     ADD CONSTRAINT fk_EdicaoJornal_idJornalAnterior_nrEdicaoAnterior FOREIGN KEY ( idJornalAnterior,
                                                                                    nrEdicaoAnterior )
         REFERENCES EdicaoJornal ( idJornal,
-                                  nrEdicao);
+                                  nrEdicao );
 
 ALTER TABLE EdicaoJornal ADD CONSTRAINT uk_EdicaoJornal_idJornalAnterior_nrEdicaoAnterior UNIQUE ( idJornalAnterior,
                                                                                                    nrEdicaoAnterior );
@@ -194,4 +195,3 @@ ALTER TABLE NoticiaJornalista
 ALTER TABLE Jornalista
     ADD CONSTRAINT fk_Jornalista_idPessoa FOREIGN KEY ( idPessoa )
         REFERENCES Pessoa ( idPessoa );
-        
