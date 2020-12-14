@@ -1,5 +1,5 @@
 --Implementar RI
---Inserir Dados: 9 jornais, 2 edições/jornal, 2 noticias/edição, 
+--Inserir Dados: 3 jornais, 2 edições/jornal, 2 noticias/edição, 
 --4 jornalistas : 1 jornalista autor cada noticia, 1 coautor e/ou revisor algumas noticias
 --clientes
 --2 pontos venda
@@ -116,6 +116,87 @@ INSERT INTO EdicaoJornal (
     null,
     null
 );
+
+INSERT INTO EdicaoJornal (
+    nrEdicao,
+    idJornal,
+    precoBase,
+    precoVenda,
+    idJornalAnterior,
+    nrEdicaoAnterior
+) VALUES (
+    2,
+    1,
+    2.40,
+    2.99,
+    1,
+    1
+);
+
+INSERT INTO EdicaoJornal (
+    nrEdicao,
+    idJornal,
+    precoBase,
+    precoVenda,
+    idJornalAnterior,
+    nrEdicaoAnterior
+) VALUES (
+    1,
+    2,
+    1.65,
+    2.35,
+    null,
+    null
+);
+
+INSERT INTO EdicaoJornal (
+    nrEdicao,
+    idJornal,
+    precoBase,
+    precoVenda,
+    idJornalAnterior,
+    nrEdicaoAnterior
+) VALUES (
+    2,
+    2,
+    3.40,
+    5.99,
+    2,
+    1
+);
+
+INSERT INTO EdicaoJornal (
+    nrEdicao,
+    idJornal,
+    precoBase,
+    precoVenda,
+    idJornalAnterior,
+    nrEdicaoAnterior
+) VALUES (
+    1,
+    3,
+    3.10,
+    4.99,
+    null,
+    null
+);
+
+INSERT INTO EdicaoJornal (
+    nrEdicao,
+    idJornal,
+    precoBase,
+    precoVenda,
+    idJornalAnterior,
+    nrEdicaoAnterior
+) VALUES (
+    2,
+    3,
+    3.10,
+    4.99,
+    3,
+    1
+);
+
 
 UPDATE Cliente
 SET
