@@ -151,3 +151,35 @@ CREATE TABLE Pagamento (
         CONSTRAINT nn_Pagamento_valorTotal NOT NULL
         CONSTRAINT ck_Pagamento_valorTotal CHECK ( valorTotal > - 1 )
 );
+
+ALTER TABLE Atleta
+    ADD CONSTRAINT fk_Atleta_clubeID FOREIGN KEY ( clubeID )
+        REFERENCES ClubeDesportivo ( clubeID );
+
+ALTER TABLE Atleta
+    ADD CONSTRAINT fk_Atleta_Actividade FOREIGN KEY ( actividade )
+        REFERENCES Actividade ( actividadeID );
+
+ALTER TABLE Atleta
+    ADD CONSTRAINT fk_Atleta_genero FOREIGN KEY ( tipoGenero )
+        REFERENCES Genero ( tipoGenero );
+
+ALTER TABLE Atleta
+    ADD CONSTRAINT fk_Atleta_tipoAtletaID FOREIGN KEY ( tipoAtletaID )
+        REFERENCES TipoAtleta ( TipoAtletaID );
+        
+ALTER TABLE NaoProfissional
+    ADD CONSTRAINT fk_NaoProfissional_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
+        REFERENCES Atleta ( numSocio, clubeID );
+        
+ALTER TABLE Profissional
+    ADD CONSTRAINT fk_Profissional_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
+        REFERENCES Atleta ( numSocio, clubeID );
+        
+ALTER TABLE Amador
+    ADD CONSTRAINT fk_Amador_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
+        REFERENCES Atleta ( numSocio, clubeID );
+        
+ALTER TABLE SemiProfissional
+    ADD CONSTRAINT fk_SemiProfissional_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
+        REFERENCES Atleta ( numSocio, clubeID );
