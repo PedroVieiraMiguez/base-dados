@@ -351,41 +351,49 @@ INSERT INTO Noticia (
 INSERT INTO Pessoa (
     idPessoa,
     nome,
-    dataNascimento
+    dataNascimento,
+    genero
 ) VALUES (
     1,
     'Ricardo Luis',
-    TO_DATE('25/01/1965', 'dd/mm/yyyy')
+    TO_DATE('25/01/1965', 'dd/mm/yyyy'),
+    'M'
 );
 
 INSERT INTO Pessoa (
     idPessoa,
     nome,
-    dataNascimento
+    dataNascimento,
+    genero
 ) VALUES (
     2,
     'Maria Luz',
-    TO_DATE('11/06/1993', 'dd/mm/yyyy')
+    TO_DATE('11/06/1993', 'dd/mm/yyyy'),
+    'F'
 );
 
 INSERT INTO Pessoa (
     idPessoa,
     nome,
-    dataNascimento
+    dataNascimento,
+    genero
 ) VALUES (
     3,
     'Rogério Luz',
-    TO_DATE('12/06/1993', 'dd/mm/yyyy')
+    TO_DATE('12/06/1993', 'dd/mm/yyyy'),
+    'M'
 );
 
 INSERT INTO Pessoa (
     idPessoa,
     nome,
-    dataNascimento
+    dataNascimento,
+    genero
 ) VALUES (
     4,
     'Rui Sousa',
-    TO_DATE('30/11/1987', 'dd/mm/yyyy')
+    TO_DATE('30/11/1987', 'dd/mm/yyyy'),
+    'F'
 );
 
 INSERT INTO Jornalista (
@@ -718,6 +726,7 @@ INSERT INTO Compra (
     1,
     2
 );
+
 
 select * from Compra;
 commit;
