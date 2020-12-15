@@ -96,5 +96,58 @@ CREATE TABLE Premio (
     numSocio        INTEGER
 );
 
-CREATE TABLE Genero ( tipoGenero char(1) primary key add constraint check(upper(tipoGenero) IN('M', 'F'));
+CREATE TABLE Genero (
+    tipoGenero CHAR(1) PRIMARY KEY
+        CONSTRAINT ck_Genero_tipoGenero CHECK ( upper(tipoGenero) IN ( 'M', 'F' ) )
+);
 
+CREATE TABLE Actividade (
+    actividadeID  INTEGER PRIMARY KEY,
+    designacao    VARCHAR(30)
+        CONSTRAINT nn_Actividade_designacao NOT NULL
+);
+
+CREATE TABLE ValoresRefFCM (
+    tipoGenero    CHAR(1),
+    actividadeID  INTEGER,
+    valorFixo1    FLOAT
+        CONSTRAINT nn_ValoresRefCFCM_valorFixo1 NOT NULL,
+    valorfixo2    FLOAT
+        CONSTRAINT nn_ValoresRefCFCM_valorFixo2 NOT NULL,
+    CONSTRAINT pk_ValoresRefFCM_tipoGenero_actividadeID PRIMARY KEY ( tipoGenero,
+                                                                      actividadeID )
+);
+
+CREATE TABLE TipoAtleta (
+    tipoAtletaID  INTEGER PRIMARY KEY,
+    descricao     VARCHAR(30),
+    constraint    nn_TipoAtleta_Descricao NOT NULL
+);
+
+CREATE TABLE ValorParcelaFixa (
+    valorParcelaFixaID  INTEGER PRIMARY KEY,
+    tipoAtletaID        INTEGER,
+    valorParcela        FLOAT
+        CONSTRAINT nn_ValorParcelaFixa_valorParcela NOT NULL
+        CONSTRAINT ck_ValorParcelaFixa_valorParcela CHECK ( valorParcela > - 1 )
+);
+
+CREATE TABLE Pagamento (
+    pagamentoID    INTEGER PRIMARY KEY,
+    dataPagamento  DATE
+        CONSTRAINT nn_Pagamento_dataPagamento NOT NULL
+        CONSTRAINT ck_Pagamento_dataPagamento CHECK ( dataPagamento >= TO_DATE('01/01/1950', 'dd/mm/yyyy') ),
+    clubeID        INTEGER
+        CONSTRAINT nn_clubeID NOT NULL,
+    numSocio       INTEGER
+        CONSTRAINT nn_numSocio NOT NULL,
+    parcela1       FLOAT
+        CONSTRAINT nn_Pagamento_valorParcela1 NOT NULL
+        CONSTRAINT ck_Pagamento_valorParcela1 CHECK ( valorParcela1 > - 1 ),
+    parcela2       FLOAT
+        CONSTRAINT nn_Pagamento_valorParcela2 NOT NULL
+        CONSTRAINT ck_Pagamento_valorParcela2 CHECK ( valorParcela2 > - 1 ),
+    valorTotal     FLOAT
+        CONSTRAINT nn_Pagamento_valorTotal NOT NULL
+        CONSTRAINT ck_Pagamento_valorTotal CHECK ( valorTotal > - 1 )
+);
