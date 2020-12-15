@@ -167,19 +167,65 @@ ALTER TABLE Atleta
 ALTER TABLE Atleta
     ADD CONSTRAINT fk_Atleta_tipoAtletaID FOREIGN KEY ( tipoAtletaID )
         REFERENCES TipoAtleta ( TipoAtletaID );
-        
+
 ALTER TABLE NaoProfissional
-    ADD CONSTRAINT fk_NaoProfissional_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
-        REFERENCES Atleta ( numSocio, clubeID );
-        
+    ADD CONSTRAINT fk_NaoProfissional_numSocio_clubeID FOREIGN KEY ( numSocio,
+                                                                     clubeID )
+        REFERENCES Atleta ( numSocio,
+                            clubeID );
+
 ALTER TABLE Profissional
-    ADD CONSTRAINT fk_Profissional_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
-        REFERENCES Atleta ( numSocio, clubeID );
-        
+    ADD CONSTRAINT fk_Profissional_numSocio_clubeID FOREIGN KEY ( numSocio,
+                                                                  clubeID )
+        REFERENCES Atleta ( numSocio,
+                            clubeID );
+
 ALTER TABLE Amador
-    ADD CONSTRAINT fk_Amador_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
-        REFERENCES Atleta ( numSocio, clubeID );
-        
+    ADD CONSTRAINT fk_Amador_numSocio_clubeID FOREIGN KEY ( numSocio,
+                                                            clubeID )
+        REFERENCES Atleta ( numSocio,
+                            clubeID );
+
 ALTER TABLE SemiProfissional
-    ADD CONSTRAINT fk_SemiProfissional_numSocio_clubeID FOREIGN KEY ( numSocio, clubeID )
-        REFERENCES Atleta ( numSocio, clubeID );
+    ADD CONSTRAINT fk_SemiProfissional_numSocio_clubeID FOREIGN KEY ( numSocio,
+                                                                      clubeID )
+        REFERENCES Atleta ( numSocio,
+                            clubeID );
+
+ALTER TABLE Inscricao
+    ADD CONSTRAINT fk_Inscricao_numSocio FOREIGN KEY ( numSocio )
+        REFERENCES Atleta ( numSocio );
+
+ALTER TABLE Inscricao
+    ADD CONSTRAINT fk_Inscricao_competicaoID FOREIGN KEY ( competicaoID )
+        REFERENCES Competicao ( competicaoID );
+
+ALTER TABLE Pagamento
+    ADD CONSTRAINT fk_Pagamento_numSocio_clubeID FOREIGN KEY ( numSocio,
+                                                               clubeID )
+        REFERENCES Atleta ( numSocio,
+                            clubeID );
+
+ALTER TABLE ValorParcelaFixa
+    ADD CONSTRAINT fk_ValorParcelaFixa_tipoAtletaID FOREIGN KEY ( tipoAtletaID )
+        REFERENCES TipoAtleta ( tipoAtletaID );
+
+ALTER TABLE ValoresRefFCM
+    ADD CONSTRAINT fk_ValoresRefFCM_actividadeID FOREIGN KEY ( actividadeID )
+        REFERENCES Actividade ( actividadeID );
+
+ALTER TABLE ValoresRefFCM
+    ADD CONSTRAINT fk_ValoresRefFCM_tipoGenero FOREIGN KEY ( tipoGenero )
+        REFERENCES Genero ( tipoGenero );
+
+ALTER TABLE Genero
+    ADD CONSTRAINT fk_Genero_numSocio FOREIGN KEY ( numSocio )
+        REFERENCES Atleta ( numSocio );
+
+ALTER TABLE Premio
+    ADD CONSTRAINT fk_Premio_CompeticaoID FOREIGN KEY ( competicaoID )
+        REFERENCES Competicao ( competicaoID );
+        
+ALTER TABLE Premio
+    ADD CONSTRAINT fk_Premio_numSocio FOREIGN KEY ( numSocio )
+        REFERENCES Atleta ( numSocio );
