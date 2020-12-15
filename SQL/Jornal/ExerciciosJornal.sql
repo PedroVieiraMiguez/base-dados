@@ -153,7 +153,7 @@ GROUP BY
     
 SELECT
     max(precoVenda),
-    min(precoVenda),
+    min(precoVenda), 
     idPontoVenda
 FROM
     PontoVenda natural join EdicaoJornal
