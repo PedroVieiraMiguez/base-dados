@@ -197,6 +197,22 @@ INSERT INTO EdicaoJornal (
     1
 );
 
+INSERT INTO EdicaoJornal (
+    nrEdicao,
+    idJornal,
+    precoBase,
+    precoVenda,
+    idJornalAnterior,
+    nrEdicaoAnterior
+) VALUES (
+    3,
+    3,
+    0.10,
+    10.99,
+    3,
+    2
+);
+
 INSERT INTO Noticia (
     idNoticia,
     nrEdicao,
@@ -725,6 +741,22 @@ INSERT INTO Compra (
     1,
     1,
     2
+);
+
+INSERT INTO Compra (
+    idCompra,
+    nrEdicao,
+    idJornal,
+    idPontoVenda,
+    nrCliente,
+    quantidade
+) VALUES (
+    8,
+    3,
+    3,
+    1,
+    4,
+    5
 );
 
 

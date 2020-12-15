@@ -142,3 +142,20 @@ WHERE
     idPapel = 1
 GROUP BY
     genero;
+
+SELECT
+    COUNT(idCompra),
+    idPontoVenda
+FROM
+    compra
+GROUP BY
+    idPontoVenda;
+    
+SELECT
+    max(precoVenda),
+    min(precoVenda),
+    idPontoVenda
+FROM
+    PontoVenda natural join EdicaoJornal
+group by
+    idPontoVenda;
