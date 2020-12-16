@@ -61,7 +61,14 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.AdicionarDistribuidor">
+    <configuration name="AdicionarDistribuidor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AdicionarDistribuidor" />
+      <module name="TesteDBJornal" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TesteDBJornal" />
@@ -71,6 +78,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AdicionarDistribuidor" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -107,30 +115,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="533" y="173" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1608112029154" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1608119351725">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1608130938956">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1608119351725" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1608119351723">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1608130938956" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1608130938954">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1608119351723" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1608119351722">
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1608130938954" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1608130938953">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1608119351722" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1608119351724">
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1608130938953" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1608130938955">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1608119351724" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1608130938955" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1608112273662">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1608112273662" />
-    <state x="412" y="82" width="615" height="735" key="find.popup" timestamp="1608112563556">
+    <state x="412" y="82" width="615" height="735" key="find.popup" timestamp="1608130273507">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="412" y="82" width="615" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1608112563556" />
+    <state x="412" y="82" width="615" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1608130273507" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1608115944793">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
