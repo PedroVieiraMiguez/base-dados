@@ -374,7 +374,7 @@ INSERT INTO Pessoa (
     'Ricardo Luis',
     TO_DATE('25/01/1965', 'dd/mm/yyyy'),
     'M'
-);
+);d
 
 INSERT INTO Pessoa (
     idPessoa,
@@ -760,7 +760,7 @@ INSERT INTO Compra (
 );
 
 
-select * from Compra;
+select * from Pessoa;
 commit;
 
 delete from NoticiaJornalista where (nrIdCivil = 1111 AND idPapel = 3);

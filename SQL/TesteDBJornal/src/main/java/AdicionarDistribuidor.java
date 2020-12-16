@@ -20,8 +20,8 @@ public class AdicionarDistribuidor {
 
         //pstmt2.execute();
 
-        //PreparedStatement pstmt = conn.prepareStatement ("CREATE TABLE Distribuidor (" +
-        /*        "distribuidorID INTEGER PRIMARY KEY, " +
+        PreparedStatement pstmt = conn.prepareStatement ("CREATE TABLE Distribuidor (" +
+                "distribuidorID INTEGER PRIMARY KEY, " +
                 "idPessoa INTEGER " +
                 "CONSTRAINT uk_Distribuidor_idPessoa UNIQUE " +
                 "CONSTRAINT nn_Distribuidor_idPessoa NOT NULL, " +
@@ -29,7 +29,7 @@ public class AdicionarDistribuidor {
                 "CONSTRAINT nn_Distribuidor_DataContrato NOT NULL " +
                 "CONSTRAINT ck_Distribuidor_DataContrato CHECK ( dataContrato >= TO_DATE('01-01-1940', 'mm-dd-yyyy')))");
 
-        //pstmt.execute();*/
+        pstmt.execute();
 
         PreparedStatement ptmt2 = conn.prepareStatement("ALTER TABLE Distribuidor " +
                 "ADD CONSTRAINT fk_Distribuidor_idPessoa FOREIGN KEY (idPessoa) REFERENCES Pessoa (idPessoa)");
