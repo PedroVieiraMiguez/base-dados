@@ -91,7 +91,19 @@ CREATE TABLE Encomenda (
     dataEncomenda  DATE NOT NULL CHECK ( dataEncomenda <= TO_DATE('01 / 01 / 2020', 'dd/mm/yyyy') )
 );
 
-create table TransporteEncomenda
+create table TransporteEncomenda (
+    transporteID  VARCHAR(30),
+    encomendaID    VARCHAR(30),
+    CONSTRAINT pk_TransporteEncomenda PRIMARY KEY ( transporteID,
+                                               encomendaID )
+);
+
+create table ArmazemEncomenda (
+    armazemID  VARCHAR(30),
+    encomendaId varchar(30),
+    CONSTRAINT pk_ArmazemEncomenda PRIMARY KEY ( armazemID,
+                                               encomendaID )
+);
 
 CREATE TABLE Produto (
     produtoID     VARCHAR(30) PRIMARY KEY,
